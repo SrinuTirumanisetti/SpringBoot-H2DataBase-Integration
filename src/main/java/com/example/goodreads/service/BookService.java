@@ -1,8 +1,8 @@
-package com.example.goodreads;
+package com.example.goodreads.service;
 
 import java.util.*;
-import com.example.goodreads.Book;
-import com.example.goodreads.BookRepository;
+import com.example.goodreads.model.Book;
+import com.example.goodreads.repository.BookRepository;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 
