@@ -37,7 +37,10 @@ public class BookH2Service implements BookRepository {
 
     @Override
     public Book addBook(Book book) {
-        return new Book(3, "sample", "sample.png");
+        db.update("insert into book(name,imageUrl) values(?,?)",book.getName(),book.getImageUrl());
+        Book saved = db.queryForObject("select * from book where name=? AND imageUrl=?",
+        new BookRowMapper(),book.getName(),book.getImageUrl());
+        return saved;
     }
 
     @Override
