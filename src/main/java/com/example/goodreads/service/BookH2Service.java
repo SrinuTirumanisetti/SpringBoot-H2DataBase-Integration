@@ -53,6 +53,6 @@ public class BookH2Service implements BookRepository {
 
     @Override
     public void deleteBook(int bookId) {
-        // implementation
+        db.update("delete from book where id=?",bookId);
     }
 }
