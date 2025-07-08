@@ -45,7 +45,10 @@ public class BookH2Service implements BookRepository {
 
     @Override
     public Book updateBook(int bookId, Book book) { 
-        return new Book(3, "sample", "sample.png");
+        if(book.getName()!=null){
+            db.update("update book set name=?,imageUrl=? where id=?",book.getName(),book.getImageUrl(),bookId);
+        }
+        return getBookById(bookId);
     }
 
     @Override
