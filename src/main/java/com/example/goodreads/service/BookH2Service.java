@@ -5,7 +5,8 @@ import com.example.goodreads.model.Book;
 import com.example.goodreads.model.BookRowMapper; 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,8 +24,15 @@ public class BookH2Service implements BookRepository {
     }
 
     @Override
-    public Book getBookById(int bookId) {  
-        return new Book(3, "sample", "sample.png");
+    public Book getBookById(int bookId) { 
+        try{
+            Book book = db.queryForObject("select * from book where id =?",new BookRowMapper(),bookId);
+            return book;
+        } 
+        catch(Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        
     }
 
     @Override
